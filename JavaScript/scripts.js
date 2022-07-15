@@ -1,4 +1,5 @@
 //Height is in meters. Weight is in kilograms. 
+let pokemonRepository = (function (){
 
 let pokemonList = [
     {
@@ -133,20 +134,48 @@ let pokemonList = [
             'Bug', 'flying'
         ]
     },
-]
+];
 
-for (let i=0; i<pokemonList.length; i++)
-{
-    document.write(pokemonList[i].name + " height is "+ pokemonList[i].height +" ");
-
-
-    if(pokemonList[i].height <=0.5){
-        document.write(` and Squirtle is the shortest`);
-    }else if(pokemonList[i].height >=2){
-        document.write(` and Venusaur is the biggest`);
-    } else if(pokemonList[i].height ===1.1) {
-        document.write(` and is average height`);
+return {
+    add: function(pokemon) {
+      pokemonList.push(pokemon);
+    },
+    getAll: function() {
+      return pokemonList;
     }
+  };
+})();
+ 
+pokemonRepository.add({ name: 'Weedle', attack: 35, defence: 30, height: 1, weight: 3.2, types: ['bug', 'poison']}); 
+pokemonRepository.add({ name: 'Pikachu', attack: 50, defence: 50, height: 0.5, weight: 3.3, types: ['electric']});
+pokemonRepository.getAll().forEach(function(pokemon) {
+    document.write(pokemon.name + ' is ' + pokemon.height + ' meters tall.' + '<br>');
+});
+
+
+
+// for (let i=0; i<pokemonList.length; i++)
+// {
+//     document.write(pokemonList[i].name + " height is "+ pokemonList[i].height +" ");
+
+
+//     if(pokemonList[i].height <=0.5){
+//         document.write(` and Squirtle is the shortest`);
+//     }else if(pokemonList[i].height >=2){
+//         document.write(` and Venusaur is the biggest`);
+//     } else if(pokemonList[i].height ===1.1) {
+//         document.write(` and is average height`);
+//     }
     
-    document.write('<br>');
-}
+//     document.write('<br>');
+// }
+
+// pokemonList.forEach(function(pokemon) {
+//     document.write(pokemon.name + ' is ' + pokemon.height + ' meters tall.' + '<br>');
+// });
+
+// let list = pokemonRepository.getAll();
+
+// list.forEach(function(pokemon) {
+//     document.write(pokemon.name + ' is ' + pokemon.height + ' meters tall.' + '<br>');
+// });
