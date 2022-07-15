@@ -147,7 +147,7 @@ return {
 })();
  
 pokemonRepository.add({ name: 'Weedle', attack: 35, defence: 30, height: 1, weight: 3.2, types: ['bug', 'poison']}); 
-pokemonRepository.add({ name: 'Pikachu', attack: 50, defence: 50, height: 0.5, weight: 3.3, types: ['electric']});
+pokemonRepository.add({ name: 'Pikachu', attack: 55, defence: 40, height: 0.4, weight: 13.2, types: ['electric']});
 pokemonRepository.getAll().forEach(function(pokemon) {
     document.write(pokemon.name + ' is ' + pokemon.height + ' meters tall.' + '<br>');
 });
