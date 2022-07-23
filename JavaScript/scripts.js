@@ -75,11 +75,33 @@ let pokemonRepository = (function () {
           console.error(e);
         });
     },
+    showDetails: function (pokemon) {
+      pokemonRepository.loadDetails(pokemon).then(function (item) {
+        console.log(item);
+        // showModal(pokemon);
+      });
+    },
   };
 })();
 
+//Code for exercise 1.8
 pokemonRepository.loadList().then(function () {
   pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
   });
 });
+
+let show_modal = document.getElementById("show_modal");
+let modal_container = document.getElementById("modal_container");
+let close_modal = document.getElementById("close_modal");
+
+show_modal.addEventListener("click", () => {
+  modal_container.classList.add("show_modal");
+});
+
+close_modal.addEventListener("click", () => {
+  modal_container.classList.remove("show_modal");
+});
+
+//This is where I try to follow along with Career Foundry
+//I need to add a function that closes the modal by pressing 'esc' or clicking outside the modal
