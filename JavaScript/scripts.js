@@ -64,12 +64,14 @@ let pokemonRepository = (function () {
         })
         .then(function (details) {
           pokemon.imageUrl = details.sprites.front_default;
+          pokemon.name = details.species.name;
           pokemon.height = details.height;
           pokemon.weight = details.weight;
           pokemon.types = details.types.map((type) => type.type.name).join(",");
           pokemon.abilities = details.abilities
             .map((ability) => ability.ability.name)
             .join(",");
+          return pokemon;
         })
         .catch(function (e) {
           console.error(e);
@@ -77,14 +79,18 @@ let pokemonRepository = (function () {
     },
     showDetails: function (pokemon) {
       pokemonRepository.loadDetails(pokemon).then(function (item) {
-        console.log(item);
-        // showModal(pokemon);
+        // console.log(item);
+        document.querySelector("#modal_img").setAttribute("src", item.imageUrl);
+        document.querySelector("#modal_name").innerText = item.name;
+        document.querySelector("#modal_height").innerText =
+          item.height + " Meters";
+        showModal(pokemon);
       });
     },
   };
 })();
 
-//Code for exercise 1.8
+// Code for exercise 1.8
 pokemonRepository.loadList().then(function () {
   pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
@@ -94,7 +100,7 @@ pokemonRepository.loadList().then(function () {
 let show_modal = document.getElementById("show_modal");
 let modal_container = document.getElementById("modal_container");
 let close_modal = document.getElementById("close_modal");
-
+let modalContainer = document.querySelector("#modal_container");
 show_modal.addEventListener("click", () => {
   modal_container.classList.add("show_modal");
 });
@@ -103,5 +109,20 @@ close_modal.addEventListener("click", () => {
   modal_container.classList.remove("show_modal");
 });
 
-//This is where I try to follow along with Career Foundry
-//I need to add a function that closes the modal by pressing 'esc' or clicking outside the modal
+window.addEventListener("keydown", (e) => {
+  console.log(e.key);
+  if (e.key === "Escape" && modalContainer.classList.contains("show_modal")) {
+    hideModal();
+  }
+});
+
+function hideModal() {
+  modalContainer.classList.remove("show_modal");
+}
+
+modalContainer.addEventListener("click", (e) => {
+  let target = e.target;
+  if (target === modalContainer) {
+    hideModal();
+  }
+});

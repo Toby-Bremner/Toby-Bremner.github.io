@@ -41,7 +41,7 @@ button {
   border: 2px solid #4caf50;
 }
 
-/* #modal_container {
+#modal_container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,4 +76,4 @@ button {
 #close_modal:hover {
   cursor: pointer;
   background-color: yellowgreen;
-} */
+}
